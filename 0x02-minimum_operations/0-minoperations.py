@@ -1,19 +1,20 @@
 #!/usr/bin/python3
-""" Total no. of ops required to copy items from a file """
-import sys
+"""
+Contain a method that calculates the fewest number of operations
+needed to result in exactly n H characters in the file.
+"""
 
 
-def minOperations(n: int) -> int:
-    """ func minOperations returns the total number of
-    times needed to complete an action n times
-    dp: list with each element set to the maximum representable integer value
+def minOperations(n):
     """
-    dp = [sys.maxsize] * (n + 1)
-    # Initial state
-    dp[1] = 0
-    for i in range(2, n + 1):
-        for j in range(1, i):
-            if i % j == 0:
-                dp[i] = min(dp[i], dp[j] + i // j)
-
-    return dp[i]
+    Return the fewest number of operations needed to result in exactly
+    n H characters in the file.
+    """
+    operations = 0
+    min_operations = 2
+    while n > 1:
+        while n % min_operations == 0:
+            operations += min_operations
+            n /= min_operations
+        min_operations += 1
+    return operations
